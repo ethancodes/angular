@@ -1,11 +1,5 @@
-import { Component } from '@angular/core';
-
-export class Zero {
-  id: number;
-  name: string;
-  failures: number;
-}
-
+import { Component }  from '@angular/core';
+import { Zero }       from './zero';
 
 const ZEROES: Zero[] = [
     { id: 10, name: 'Mr. Nice', failures: 1 },
@@ -29,18 +23,7 @@ const ZEROES: Zero[] = [
         </li>
     </ul>
     
-    <div *ngIf="selectedZero">
-        <h2>{{selectedZero.name}} details...</h2>
-        <div><label>id: </label>{{selectedZero.id}}</div>
-        <div>
-          <label>name: </label>
-          <input [(ngModel)]="selectedZero.name" placeholder="name">
-        </div>
-        <div>
-          <label>failures: </label>
-          <input [(ngModel)]="selectedZero.failures" placeholder="failures">
-        </div>
-    </div>
+    <zero-detail [zero]="selectedZero"></zero-detail>
   `,
   styles: [`
       .selected {

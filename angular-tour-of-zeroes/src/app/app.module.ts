@@ -1,8 +1,10 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { NgModule }             from '@angular/core';
+import { BrowserModule }        from '@angular/platform-browser';
+import { FormsModule }          from '@angular/forms';
 
-import { AppComponent }  from './app.component';
+import { AppComponent }         from './app.component';
+
+import { ZeroDetailComponent }  from './zero-detail.component';
 
 @NgModule({
   imports: [
@@ -10,7 +12,8 @@ import { AppComponent }  from './app.component';
     FormsModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    ZeroDetailComponent
   ],
   bootstrap: [ AppComponent ]
 })
