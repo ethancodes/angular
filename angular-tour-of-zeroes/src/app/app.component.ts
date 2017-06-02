@@ -1,12 +1,8 @@
-import { Component }  from '@angular/core';
-import { Zero }       from './zero';
+import { Component }    from '@angular/core';
+import { OnInit }       from '@angular/core';
 
-const ZEROES: Zero[] = [
-    { id: 10, name: 'Mr. Nice', failures: 1 },
-    { id: 11, name: 'Friendly', failures: 2 },
-    { id: 12, name: 'Polite', failures: 4 }
-];
-
+import { Zero }         from './zero';
+import { ZeroService }  from './zero.service';
 
 @Component({
   selector: 'my-app',
@@ -73,17 +69,28 @@ const ZEROES: Zero[] = [
     	margin-right: .8em;
     	border-radius: 4px 0 0 4px;
       }
-  `]
+  `],
+  providers: [ZeroService]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'Tour of Zeroes';
-  zeroes = ZEROES;
+  zeroes: Zero[];
   selectedZero: Zero;
 
   onSelect(z: Zero): void {
     this.selectedZero = z;
+  }
+  
+  constructor(private zeroService: ZeroService) { }
+  
+  ngOnInit(): void {
+    this.getZeroes();
+  }
+  
+  getZeroes(): void {
+    this.zeroService.getZeroesSlowly().then(zeroes => this.zeroes = zeroes);
   }
 
 }
