@@ -10,6 +10,9 @@ var mock_zeroes_1 = require("./mock-zeroes");
 var ZeroService = (function () {
     function ZeroService() {
     }
+    ZeroService.prototype.getZero = function (id) {
+        return this.getZeroes().then(function (zeroes) { return zeroes.find(function (zero) { return zero.id === id; }); });
+    };
     ZeroService.prototype.getZeroes = function () {
         return Promise.resolve(mock_zeroes_1.ZEROES);
     };

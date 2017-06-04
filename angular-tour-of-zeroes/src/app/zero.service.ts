@@ -5,6 +5,12 @@ import { ZEROES }     from './mock-zeroes';
 
 @Injectable()
 export class ZeroService {
+
+  getZero(id: number): Promise<Zero> {
+    return this.getZeroes().then(
+      zeroes => zeroes.find(zero => zero.id === id)
+    );
+  }
   
   getZeroes(): Promise<Zero[]> {
     return Promise.resolve(ZEROES);

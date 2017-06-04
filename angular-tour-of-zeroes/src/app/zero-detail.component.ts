@@ -1,24 +1,52 @@
-import { Component, Input }   from '@angular/core';
-import { Zero }               from './zero';
+import { Component, OnInit }          from '@angular/core';
+import { ActivatedRoute, Params }     from '@angular/router';
+import { Location }                   from '@angular/common';
+
+import { Zero }        from './zero';
+import { ZeroService } from './zero.service';
+
+import 'rxjs/add/operator/switchMap'; /* i'm so glad this follow this other import syntax wtf */
 
 @Component({
   selector: 'zero-detail',
-  template: `
-    <div *ngIf="zero">
-        <h2>{{zero.name}} details...</h2>
-        <div><label>id: </label>{{zero.id}}</div>
-        <div>
-          <label>name: </label>
-          <input [(ngModel)]="zero.name" placeholder="name">
-        </div>
-        <div>
-          <label>failures: </label>
-          <input [(ngModel)]="zero.failures" placeholder="failures">
-        </div>
-    </div>
-  `  
+  templateUrl: './zero-detail.component.html',
+  styleUrls: [ './zero-detail.component.css' ]
 })
 
-export class ZeroDetailComponent {
-  @Input() zero: Zero;
+export class ZeroDetailComponent implements OnInit {
+
+  zero: Zero;
+
+  constructor(
+    private zeroService: ZeroService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) { }
+  
+  ngOnInit(): void {
+    this.route.params
+      .switchMap((params: Params) => this.zeroService.getZero(+params['id']))
+      .subscribe(zero => this.zero = zero);
+      
+    /**
+      According to the documentation:
+      
+      "The hero id is a number. 
+      Route parameters are always strings. 
+      So the route parameter value is converted to a number with the JavaScript (+) operator."
+      
+      I think that's the most annoying way to convert something to a number.
+      parseInt(params['id']) would at least be a little less obscure
+      Or just make the getZero() function do the conversion.
+    */
+      
+  }
+  
+  goBack(): void {
+    this.location.back();
+  }
+  /** ... really? */
+  
+  
+
 }
