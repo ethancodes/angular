@@ -39,6 +39,12 @@ var ZeroDetailComponent = (function () {
     ZeroDetailComponent.prototype.goBack = function () {
         this.location.back();
     };
+    /** ... really? */
+    ZeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.zeroService.update(this.zero)
+            .then(function () { return _this.goBack(); });
+    };
     return ZeroDetailComponent;
 }());
 ZeroDetailComponent = __decorate([

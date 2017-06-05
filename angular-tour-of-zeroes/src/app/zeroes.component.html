@@ -1,13 +1,23 @@
-    <h2>The Zeroes</h2>
-    <ul class="zeroes">
-        <li *ngFor="let z of zeroes" 
-            [class.selected]="z === selectedZero"
-            (click)="onSelect(z)">
-            <span class="badge">{{z.id}}</span>
-            {{z.name}}
-        </li>
-    </ul>
-    <div *ngIf="selectedZero">
-      <h2>{{ selectedZero.name | uppercase }} is something...</h2>
-      <button (click)="goToDetail()">View Details</button>
-    </div>    
+  <h2>The Zeroes</h2>
+
+  <div>
+    <label>Zero name:</label> <input #zeroName />
+    <button (click)="add(zeroName.value); zeroName.value=''">
+      Add
+    </button>
+  </div>
+
+  <ul class="zeroes">
+      <li *ngFor="let z of zeroes" 
+          [class.selected]="z === selectedZero"
+          (click)="onSelect(z)">
+          <span class="badge">{{z.id}}</span>
+          <span>{{z.name}}</span>
+          <button class="delete" 
+            (click)="delete(z); $event.stopPropagation()">x</button>
+      </li>
+  </ul>
+  <div *ngIf="selectedZero">
+    <h2>{{ selectedZero.name | uppercase }} is something...</h2>
+    <button (click)="goToDetail()">View Details</button>
+  </div>    

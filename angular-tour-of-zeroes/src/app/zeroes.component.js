@@ -29,6 +29,31 @@ var ZeroesComponent = (function () {
     ZeroesComponent.prototype.goToDetail = function () {
         this.router.navigate(['/zero', this.selectedZero.id]);
     };
+    ZeroesComponent.prototype.add = function (name) {
+        var _this = this;
+        name = name.trim();
+        if (!name) {
+            return;
+        }
+        this.zeroService.create(name)
+            .then(function (zero) {
+            _this.zeroes.push(zero);
+            _this.selectedZero = null;
+        });
+    };
+    ZeroesComponent.prototype.delete = function (zero) {
+        var _this = this;
+        return this.zeroService
+            .delete(zero.id)
+            .then(function () {
+            // remove the deleted zero from our list of zeroes
+            _this.zeroes = _this.zeroes.filter(function (z) { return z !== zero; });
+            // unselect this zero
+            if (_this.selectedZero === zero) {
+                _this.selectedZero = null;
+            }
+        });
+    };
     return ZeroesComponent;
 }());
 ZeroesComponent = __decorate([

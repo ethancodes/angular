@@ -48,5 +48,11 @@ export class ZeroDetailComponent implements OnInit {
   /** ... really? */
   
   
+  save(): void {
+    this.zeroService.update(this.zero)
+      .then(() => this.goBack());
+  }
+  
+  
 
 }

@@ -37,6 +37,32 @@ export class ZeroesComponent implements OnInit {
   goToDetail(): void {
     this.router.navigate(['/zero', this.selectedZero.id]);
   }
+  
+  add(name: string): void {
+  
+    name = name.trim();
+    if (!name) { return; }
+    
+    this.zeroService.create(name)
+      .then(zero => {
+        this.zeroes.push(zero);
+        this.selectedZero = null;
+      }); 
+  
+  }
+  
+  delete(zero: Zero): void {
+  
+    return this.zeroService
+            .delete(zero.id)
+            .then(() => {
+              // remove the deleted zero from our list of zeroes
+              this.zeroes = this.zeroes.filter(z => z !== zero);
+              // unselect this zero
+              if (this.selectedZero === zero) { this.selectedZero = null; }
+            });
+  
+  }
 
 }
 

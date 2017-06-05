@@ -1,0 +1,10 @@
+<div id="search-component">
+  <h4>Zero Search</h4>
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <div>
+    <div *ngFor="let z of zeroes | async"
+         (click)="gotoDetail(z)" class="search-result" >
+      {{z.name}}
+    </div>
+  </div>
+</div>

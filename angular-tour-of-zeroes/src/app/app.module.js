@@ -8,12 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
+var http_1 = require("@angular/http");
+var angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
+var in_memory_data_service_1 = require("./in-memory-data.service");
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var dashboard_component_1 = require("./dashboard.component");
 var zero_detail_component_1 = require("./zero-detail.component");
 var zeroes_component_1 = require("./zeroes.component");
 var zero_service_1 = require("./zero.service");
+var zero_search_component_1 = require("./zero-search.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,12 +29,15 @@ AppModule = __decorate([
             app_routing_module_1.AppRoutingModule,
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
+            http_1.HttpModule,
+            angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService)
         ],
         declarations: [
             app_component_1.AppComponent,
             dashboard_component_1.DashboardComponent,
             zeroes_component_1.ZeroesComponent,
-            zero_detail_component_1.ZeroDetailComponent
+            zero_detail_component_1.ZeroDetailComponent,
+            zero_search_component_1.ZeroSearchComponent
         ],
         providers: [zero_service_1.ZeroService],
         bootstrap: [app_component_1.AppComponent]
